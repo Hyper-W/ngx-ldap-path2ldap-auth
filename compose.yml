@@ -8,7 +8,7 @@ services:
         - ModVersionPatch=${ModVersionPatch:-0} # Finch Patch Version. Exclusive: FinchVersion. Dependence: FinchVersionMajor,FinchVersionMinor.
         # - ModVersion=v${ModVersionMajor:-1}.${ModVersionMinor:-20250220}.${ModVersionPatch:-0} # Exclusive: FinchVersionMajor,FinchVersionMinor,FinchVersionPatch.
     container_name: ngx-ldap-path2ldap-auth
-    image: ngx-ldap-path2ldap-auth:${ModVersionMajor:-1}.${ModVersionMinor:-20250220}.${ModVersionPatch:-0}
+    image: ghcr.io/hyper-w/ngx-ldap-path2ldap-auth:${ModVersionMajor:-1}.${ModVersionMinor:-20250220}.${ModVersionPatch:-0}
     ports:
       - "9203:9203" # For TCP Socket
     volumes:
