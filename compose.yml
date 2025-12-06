@@ -1,0 +1,30 @@
+services:
+  ngx-ldap-path2ldap-auth:
+    build:
+      context: .
+      args:
+        - ModVersionMajor=${ModVersionMajor:-1} # Finch Major Version. Exclusive: FinchVersion. Dependence: FinchVersionMinor,FinchVersionPatch.
+        - ModVersionMinor=${ModVersionMinor:-20250220} # Finch Minor Version. Exclusive: FinchVersion. Dependence: FinchVersionMajor,FinchVersionPatch.
+        - ModVersionPatch=${ModVersionPatch:-0} # Finch Patch Version. Exclusive: FinchVersion. Dependence: FinchVersionMajor,FinchVersionMinor.
+        # - ModVersion=v${ModVersionMajor:-1}.${ModVersionMinor:-20250220}.${ModVersionPatch:-0} # Exclusive: FinchVersionMajor,FinchVersionMinor,FinchVersionPatch.
+    container_name: ngx-ldap-path2ldap-auth
+    image: ngx-ldap-path2ldap-auth:${ModVersionMajor:-1}.${ModVersionMinor:-20250220}.${ModVersionPatch:-0}
+    ports:
+      - "9203:9203" # For TCP Socket
+    volumes:
+      - type: bind
+        source: ./example/ngx-ldap-path2ldap-auth.conf # For TCP Socket
+        # source: ./example/ngx-ldap-path2ldap-auth_unix.conf # For Unix Socket
+        target: /ngx-ldap-path2ldap-auth_conf/ngx-ldap-path2ldap-auth.conf
+        read_only: true
+      # - type: volume
+      #   source: ngx-ldap-path2ldap-auth-socket
+      #   target: /run
+
+# volumes:
+#   ngx-ldap-path2ldap-auth-socket:
+#     name: ngx-ldap-path2ldap-auth-socket
+#     driver: local
+#     driver_opts:
+#       type: tmpfs
+#       device: tmpfs
