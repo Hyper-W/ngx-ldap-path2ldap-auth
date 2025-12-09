@@ -3,11 +3,11 @@ ARG ModVersionMinor=20250220
 ARG ModVersionPatch=0
 ARG ModVersion="v${ModVersionMajor}.${ModVersionMinor}.${ModVersionPatch}"
 
-FROM busybox:latest AS dir
+FROM --platform=amd64 busybox:latest AS dir
 
 RUN mkdir -pm 400 /ngx-ldap-path2ldap-auth_conf
 
-FROM alpine:latest AS builder
+FROM --platform=amd64 alpine:latest AS builder
 
 ARG ModVersion
 RUN apk update && apk add --no-cache go git \
