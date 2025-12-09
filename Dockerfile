@@ -1,3 +1,7 @@
+FROM busybox:latest AS dir
+
+RUN mkdir -pm 400 /ngx-ldap-path2ldap-auth_conf
+
 FROM alpine:latest AS builder
 
 ARG ModVersion
@@ -9,8 +13,8 @@ RUN apk update && apk add --no-cache go git \
 
 FROM scratch AS app
 
+COPY --from=dir /ngx-ldap-path2ldap-auth_conf /ngx-ldap-path2ldap-auth_conf
 COPY --from=builder /usr/bin/ngx_ldap_path2ldap_auth /ngx_ldap_path2ldap_auth
-COPY --from=builder /ngx-ldap-path2ldap-auth_conf /ngx-ldap-path2ldap-auth_conf
 
 ENTRYPOINT [ "/ngx_ldap_path2ldap_auth" ]
 CMD [ "/ngx-ldap-path2ldap-auth_conf/ngx-ldap-path2ldap-auth.conf" ]
