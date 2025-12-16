@@ -26,4 +26,5 @@ authz:
 
 logging:
   enable_console: true
-  logfile: "/ngx-ldap-path2ldap-auth_conf/logfilea.log"
+  logfile: "/ngx-ldap-path2ldap-auth_conf/logfile.log"
+  logging_level: "normal"
