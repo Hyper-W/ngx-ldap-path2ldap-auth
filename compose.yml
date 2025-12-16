@@ -4,11 +4,15 @@ services:
       context: .
     container_name: ngx-ldap-path2ldap-auth
     image: ghcr.io/hyper-w/ngx-ldap-path2ldap-auth:latest
+    # command: ["/ngx-ldap-path2ldap-auth_conf/ngx-ldap-path2ldap-auth.conf"] # conf
+    command: ["/ngx-ldap-path2ldap-auth_conf/auth-ldap-path2ldap.yaml"] # yaml
     volumes:
       - type: bind
-        source: ./example/ngx-ldap-path2ldap-auth.conf # For TCP Socket
+        # source: ./example/ngx-ldap-path2ldap-auth.conf # For TCP Socket
+        source: ./example/auth-ldap-path2ldap.yaml # yaml
         # source: ./example/ngx-ldap-path2ldap-auth_unix.conf # For Unix Socket
-        target: /ngx-ldap-path2ldap-auth_conf/ngx-ldap-path2ldap-auth.conf
+        # target: /ngx-ldap-path2ldap-auth_conf/ngx-ldap-path2ldap-auth.conf # conf
+        target: /ngx-ldap-path2ldap-auth_conf/auth-ldap-path2ldap.yaml # yaml
         read_only: true
       # - type: volume
       #   source: ngx-ldap-path2ldap-auth-socket
